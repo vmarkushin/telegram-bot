@@ -706,7 +706,7 @@ pub struct RawMessageEntity {
 }
 
 /// This object represents one size of a photo or a file / sticker thumbnail.
-#[derive(Debug, Clone, PartialEq, PartialOrd, Deserialize)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Serialize, Deserialize)]
 pub struct PhotoSize {
     /// Unique identifier for this file.
     pub file_id: String,
@@ -736,7 +736,7 @@ pub struct Audio {
 }
 
 /// This object represents a general file (as opposed to photos, voice messages and audio files).
-#[derive(Debug, Clone, PartialEq, PartialOrd, Deserialize)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Serialize, Deserialize)]
 pub struct Document {
     /// Unique file identifier.
     pub file_id: String,
