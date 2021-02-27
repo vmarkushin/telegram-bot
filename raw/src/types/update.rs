@@ -8,7 +8,7 @@ pub struct Update {
     #[serde(rename = "update_id")]
     pub id: Integer,
     /// Kind of the incoming update.
-    #[serde(flatten)]
+    #[serde(flatten, default)]
     pub kind: UpdateKind,
 }
 
@@ -42,4 +42,10 @@ pub enum UpdateKind {
     Error(String),
     #[doc(hidden)]
     Unknown,
+}
+
+impl Default for UpdateKind {
+    fn default() -> Self {
+        Self::Unknown
+    }
 }
