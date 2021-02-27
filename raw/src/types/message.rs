@@ -26,6 +26,8 @@ pub struct Message {
     /// For replies, the original message. Note that the Message object in this field will not
     /// contain further reply_to_message fields even if it itself is a reply.
     pub reply_to_message: Option<Box<MessageOrChannelPost>>,
+    /// Bot through which the message was sent.
+    pub via_bot: Option<User>,
     /// Date the message was last edited in Unix time.
     pub edit_date: Option<Integer>,
     /// Kind of the message.
@@ -229,6 +231,7 @@ impl Message {
 
         let reply_to_message = raw.reply_to_message.clone();
         let edit_date = raw.edit_date;
+        let via_bot = raw.via_bot.clone();
 
         let forward = match (
             raw.forward_date,
@@ -263,13 +266,14 @@ impl Message {
         let make_message = |kind| {
             Ok(Message {
                 id: id.into(),
-                from: from,
-                date: date,
-                chat: chat,
-                forward: forward,
-                reply_to_message: reply_to_message,
-                edit_date: edit_date,
-                kind: kind,
+                from,
+                date,
+                chat,
+                forward,
+                reply_to_message,
+                via_bot,
+                edit_date,
+                kind,
             })
         };
 
@@ -543,6 +547,8 @@ pub struct RawMessage {
     /// For replies, the original message. Note that the Message object in this field will not
     /// contain further reply_to_message fields even if it itself is a reply.
     pub reply_to_message: Option<Box<MessageOrChannelPost>>,
+    /// Bot through which the message was sent.
+    pub via_bot: Option<User>,
     /// Date the message was last edited in Unix time.
     pub edit_date: Option<Integer>,
     /// The unique identifier of a media message group this message belongs to.
