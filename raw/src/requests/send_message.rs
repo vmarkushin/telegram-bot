@@ -78,6 +78,10 @@ impl<'s> SendMessage<'s> {
         self.reply_markup = Some(reply_markup.into());
         self
     }
+
+    pub fn get_reply_markup_mut(&mut self) -> Option<&mut ReplyMarkup> {
+        self.reply_markup.as_mut()
+    }
 }
 
 /// Send text message.
