@@ -8,18 +8,18 @@ use crate::types::*;
 #[derive(Debug, Clone, PartialEq, PartialOrd, Serialize)]
 #[must_use = "requests do nothing unless sent"]
 pub struct SendMessage<'s> {
-    chat_id: ChatRef,
-    text: Cow<'s, str>,
+    pub chat_id: ChatRef,
+    pub text: Cow<'s, str>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    parse_mode: Option<ParseMode>,
+    pub parse_mode: Option<ParseMode>,
     #[serde(skip_serializing_if = "Not::not")]
-    disable_web_page_preview: bool,
+    pub disable_web_page_preview: bool,
     #[serde(skip_serializing_if = "Not::not")]
-    disable_notification: bool,
+    pub disable_notification: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_to_message_id: Option<MessageId>,
+    pub reply_to_message_id: Option<MessageId>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<ReplyMarkup>,
+    pub reply_markup: Option<ReplyMarkup>,
 }
 
 impl<'c, 's> Request for SendMessage<'s> {
